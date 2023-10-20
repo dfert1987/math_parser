@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ExcelReader from './components/ExcelReader';
+import MainDisplay from './components/MainDisplay';
+import NavBar from './components/NavBar';
 import './App.css';
 
 function App() {
+    const [data, setData] = useState([]);
+
     return (
-        <div className='App'>
-            <h1>Math Excel Thingy</h1>
-            <ExcelReader />
-        </div>
+        <Router>
+            <div className='App'>
+                <NavBar />
+                <Routes>
+                    <Route
+                        path='/'
+                        element={<ExcelReader setData={setData} />}
+                    />
+                </Routes>
+                <Routes>
+                    <Route
+                        path='/lessons'
+                        element={<MainDisplay data={data} />}
+                    />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 

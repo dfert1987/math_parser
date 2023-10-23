@@ -27,8 +27,6 @@ function ExcelReader({ setData }) {
 
                     const ws = wb.Sheets[wsname];
 
-                    console.log(ws);
-
                     const data = XLSX.utils.sheet_to_json(ws);
 
                     resolve(data);
@@ -59,7 +57,9 @@ function ExcelReader({ setData }) {
                     readExcel(file);
                 }}
             />
-            <label for='file'>Select a File</label>
+            <label className='excelLabel' for='file'>
+                Select a File
+            </label>
             {error && (
                 <div className='xlsError'>Please choose a valid Excel file</div>
             )}

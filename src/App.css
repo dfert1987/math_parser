@@ -15,7 +15,7 @@ input[type='file'] {
     display: none;
 }
 
-label {
+.excelLabel {
     width: 200px;
     height: 50px;
     border-radius: 25px;
@@ -108,4 +108,27 @@ li {
 
 .mainHeader img {
     height: 200px;
+}
+
+.selectSection {
+    padding: 2em;
+}
+
+.selectionTitleContainer {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.dropsContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.dropCont {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: bold;
 }

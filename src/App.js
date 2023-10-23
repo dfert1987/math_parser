@@ -17,8 +17,7 @@ function App() {
                         path='/'
                         element={<ExcelReader setData={setData} />}
                     />
-                </Routes>
-                <Routes>
+              
                     <Route
                         path='/lessons'
                         element={<MainDisplay data={data} />}

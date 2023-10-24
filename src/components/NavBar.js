@@ -7,7 +7,6 @@ function NavBar() {
 
     const pathMatchRoute = (route) => {
         if (route === location.pathname) {
-            console.log()
             return true;
         }
     };

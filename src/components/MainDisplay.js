@@ -1,70 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import React, { useState } from 'react';
+import DisplayLesson from './DisplayLesson';
 import StevePic from '../assets/steve.jpeg';
-import { DropdownButton } from 'react-bootstrap';
 
 function MainDisplay({ data }) {
     const [filteredData, setFilteredData] = useState([]);
     const [filteredDataMods, setFilteredDataMods] = useState([]);
-    const [mainLesson, setMainLesson] = useState({});
     const [grade, setGrade] = useState();
     const [module, setModule] = useState();
     const [lesson, setLesson] = useState();
     const [moduleOptions, setModuleOptions] = useState([]);
     const [lessonOptions, setLessonOptions] = useState([]);
-
-    const gradeOptions = [1, 2, 3, 4];
-
-    useEffect(() => {
-        if (data.length) {
-            setMainLesson(data[0]);
-
-            // setGrade(data[0].Grade);
-            // setModule(data[0].L1);
-            // setLesson(data[0].L2);
-        }
-    }, [data]);
-
-    // console.log(data);
+    const [lessonDisplayData, setLessonDisplayData] = useState([]);
+    const [getItools, setGetItools] = useState([]);
 
     const onSelect = (e, dropType, option) => {
+        e.preventDefault();
         if (dropType === 'grade') {
             setGrade(option);
+            setLesson();
+            setModule();
+            setFilteredDataMods([]);
+            setLessonOptions([]);
 
-            let newData = data.filter((item) => item.Grade === option);
-            console.log(newData);
-            setFilteredData(newData);
-            const newModules = newData.map((item) => item.L1);
-            const strings = newModules.map(String);
+            let removeUndefined = data.filter((item) => item.L1 !== undefined);
 
-            let noDups = [];
-            strings.forEach((element) => {
-                if (element !== 'undefined' && !noDups.includes(element)) {
-                    noDups.push(element);
+            let filteredStrings = removeUndefined.map((obj) =>
+                Object.fromEntries(
+                    Object.entries(obj).map(([key, value]) => [key, `${value}`])
+                )
+            );
+
+            let justItool = filteredStrings.filter(
+                (item) => item['Product Label'] === 'iTools'
+            );
+
+            let justMods = filteredStrings.map((item) => item.L1);
+
+            let noDuplicateMods = [];
+
+            justMods.forEach((item) => {
+                if (!noDuplicateMods.includes(item)) {
+                    noDuplicateMods.push(item);
                 }
             });
-            // setModuleOptions(noDups);
-            // setFilteredData(newData);
+
+            setGetItools(justItool);
+            setFilteredData(filteredStrings);
+            setModuleOptions(noDuplicateMods);
         }
         if (dropType === 'module') {
-            // console.log(option);
-            setModule(option);
-            console.log(filteredData);
-            const newData = filteredData.filter((item) => item.L1 === option);
-            console.log(newData);
-            setFilteredDataMods(newData);
-            const newLessons = newData.map(
-                (item) => item['L2 Title']
+            let lessonsOfModule = filteredData.filter(
+                (item) => item.L1 === option
             );
-            console.log(newLessons);
 
-            let noDups = [];
-            newLessons.forEach((element) => {
-                if (element !== undefined && !noDups.includes(element)) {
-                    noDups.push(element);
+            let removeUndefined = lessonsOfModule.filter(
+                (item) => item.L2 !== undefined
+            );
+
+            let justLessons = removeUndefined.map((item) => item.L2);
+
+            let noDuplicateLessons = [];
+
+            justLessons.forEach((item) => {
+                if (!noDuplicateLessons.includes(item)) {
+                    noDuplicateLessons.push(item);
                 }
             });
-            setLessonOptions(noDups);
+
+            console.log(noDuplicateLessons);
+        }
+        if (dropType === 'lesson') {
         }
     };
 
@@ -91,11 +96,9 @@ function MainDisplay({ data }) {
                                     Grade
                                 </option>
 
-                                {gradeOptions.map((option) => (
-                                    <option value={option} key={option + 1}>
-                                        {option}
-                                    </option>
-                                ))}
+                                <option value={1} key={1}>
+                                    {1}
+                                </option>
                             </select>
                         </div>
                         <div className='dropCont'>
@@ -124,7 +127,7 @@ function MainDisplay({ data }) {
                                 placeholder='Lesson'
                                 value={lesson}
                                 onChange={(e) =>
-                                    onSelect('lesson', e.target.value)
+                                    onSelect(e, 'lesson', e.target.value)
                                 }>
                                 <option value='' selected disabled>
                                     Lesson
@@ -138,17 +141,19 @@ function MainDisplay({ data }) {
                         </div>
                     </div>
                 </div>
-                <div className='selectionTitleContainer'>
-                    <h2 className='lessonGrade'>Grade {mainLesson.Grade}</h2>
-                    {mainLesson.L1 && (
-                        <h2 className='lessonMod'>Module: {mainLesson.L1} </h2>
-                    )}
-                    {mainLesson.L2 && (
-                        <h2 className='lessonL'>Lesson: {mainLesson.L2}</h2>
-                    )}
-                    <h2 className='lessonGrade'>{mainLesson.DisplayTitle}</h2>
-                </div>
+                <hr className='divider' />
+                <DisplayLesson
+                    data={lessonDisplayData}
+                    itools={getItools}
+                    ofMod={filteredDataMods}
+                />
             </div>
+        );
+    } else {
+        return (
+            <>
+                <h1>Please add a valid Excel file</h1>
+            </>
         );
     }
 }

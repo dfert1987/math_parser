@@ -50,9 +50,10 @@ input:focus + label {
     color: #fff;
 }
 
-.navListItem.selected:hover {
-    color: black;
-    transition: 0.5ms;
+.divider {
+    border-top: 3px solid black;
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .topnav {
@@ -131,4 +132,33 @@ li {
     flex-direction: column;
     text-align: left;
     font-weight: bold;
+}
+
+.lessonContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.sectionTitle {
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+    padding: 1em;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+.manip {
+    background-color: #7873f5;
+    color: white;
+}
+
+.routines {
+    background-color: #ff6ec4;
+    color: white;
+}
+
+.extra {
+  background-color: rgb(7, 122, 122);
+  color: white;
 }

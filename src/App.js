@@ -14,7 +14,7 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route
-                        path='/'
+                        exact path='/'
                         element={<ExcelReader setData={setData} />}
                     />
               

@@ -38,7 +38,6 @@ function ExcelReader({ setData }) {
             });
 
             promise.then((d) => {
-                console.log(d);
                 setData(d);
                 navigate('/lessons');
             });
@@ -57,7 +56,7 @@ function ExcelReader({ setData }) {
                     readExcel(file);
                 }}
             />
-            <label className='excelLabel' for='file'>
+            <label className='excelLabel' htmlFor='file'>
                 Select a File
             </label>
             {error && (

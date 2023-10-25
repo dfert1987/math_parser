@@ -11,7 +11,6 @@ function MainDisplay({ data }) {
     const [moduleOptions, setModuleOptions] = useState([]);
     const [lessonOptions, setLessonOptions] = useState([]);
     const [lessonDisplayData, setLessonDisplayData] = useState([]);
-    const [getItools, setGetItools] = useState([]);
 
     const onSelect = (e, dropType, option) => {
         e.preventDefault();
@@ -30,10 +29,6 @@ function MainDisplay({ data }) {
                 )
             );
 
-            let justItool = filteredStrings.filter(
-                (item) => item['Product Label'] === 'iTools'
-            );
-
             let justMods = filteredStrings.map((item) => item.L1);
 
             let noDuplicateMods = [];
@@ -44,7 +39,6 @@ function MainDisplay({ data }) {
                 }
             });
 
-            setGetItools(justItool);
             setFilteredData(filteredStrings);
             setModuleOptions(noDuplicateMods);
         }
@@ -56,6 +50,7 @@ function MainDisplay({ data }) {
             let removeUndefined = lessonsOfModule.filter(
                 (item) => item.L2 !== undefined
             );
+            setFilteredData(removeUndefined);
 
             let justLessons = removeUndefined.map((item) => item.L2);
 
@@ -66,10 +61,13 @@ function MainDisplay({ data }) {
                     noDuplicateLessons.push(item);
                 }
             });
-
-            console.log(noDuplicateLessons);
+            setLessonOptions(noDuplicateLessons);
         }
         if (dropType === 'lesson') {
+            let filterLesson = filteredData.filter(
+                (item) => item.L2 === option
+            );
+            setLessonDisplayData(filterLesson);
         }
     };
 
@@ -144,8 +142,6 @@ function MainDisplay({ data }) {
                 <hr className='divider' />
                 <DisplayLesson
                     data={lessonDisplayData}
-                    itools={getItools}
-                    ofMod={filteredDataMods}
                 />
             </div>
         );

@@ -3,7 +3,7 @@ import DisplayLesson from './DisplayLesson';
 import StevePic from '../assets/steve.jpeg';
 
 function MainDisplay({ data }) {
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredDataGrade, setFilteredDataGrade] = useState([]);
     const [filteredDataMods, setFilteredDataMods] = useState([]);
     const [grade, setGrade] = useState();
     const [module, setModule] = useState();
@@ -18,8 +18,8 @@ function MainDisplay({ data }) {
             setGrade(option);
             setLesson();
             setModule();
-            setFilteredDataMods([]);
             setLessonOptions([]);
+            setFilteredDataGrade([]);
 
             let removeUndefined = data.filter((item) => item.L1 !== undefined);
 
@@ -39,20 +39,25 @@ function MainDisplay({ data }) {
                 }
             });
 
-            setFilteredData(filteredStrings);
+            setFilteredDataGrade(filteredStrings);
             setModuleOptions(noDuplicateMods);
         }
         if (dropType === 'module') {
-            let lessonsOfModule = filteredData.filter(
+            setLesson();
+            setLessonOptions([]);
+            setFilteredDataMods([]);
+
+            let lessonsOfModule = filteredDataGrade.filter(
                 (item) => item.L1 === option
             );
 
             let removeUndefined = lessonsOfModule.filter(
                 (item) => item.L2 !== undefined
             );
-            setFilteredData(removeUndefined);
+            setFilteredDataMods(removeUndefined);
 
             let justLessons = removeUndefined.map((item) => item.L2);
+            console.log(justLessons);
 
             let noDuplicateLessons = [];
 
@@ -64,7 +69,7 @@ function MainDisplay({ data }) {
             setLessonOptions(noDuplicateLessons);
         }
         if (dropType === 'lesson') {
-            let filterLesson = filteredData.filter(
+            let filterLesson = filteredDataMods.filter(
                 (item) => item.L2 === option
             );
             setLessonDisplayData(filterLesson);
@@ -142,6 +147,7 @@ function MainDisplay({ data }) {
                 <hr className='divider' />
                 <DisplayLesson
                     data={lessonDisplayData}
+                    modData={filteredDataMods}
                 />
             </div>
         );

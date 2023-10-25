@@ -25,6 +25,8 @@ input[type='file'] {
     align-items: center;
     justify-content: center;
     color: #fff;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease-out;
@@ -44,10 +46,22 @@ input:focus + label {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5em;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
 
 .navListItem.selected {
     color: #fff;
+}
+
+.excelConverterTitle {
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .divider {
@@ -139,6 +153,7 @@ li {
     flex-direction: column;
     padding-left: 2em;
     padding-right: 2em;
+    padding-bottom: 2em;
 }
 
 .sectionTitle {
@@ -159,6 +174,61 @@ li {
 }
 
 .extra {
-  background-color: rgb(7, 122, 122);
-  color: white;
+    background-color: rgb(7, 122, 122);
+    color: white;
+}
+
+.cardRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    padding: 1em;
+    width: 500px;
+    height: 4em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.innerCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5em;
+    font-size: 20px;
+}
+
+.innerCard img {
+    max-height: 125px;
+    max-width: 250px;
+    padding-right: 0.5em;
+}
+
+.card.Manipulatives {
+    background-color: aquamarine;
+}
+
+.card.Routines {
+    background-color: aliceblue;
+}
+.card.Extra {
+    background-color: darkturquoise;
+}
+
+.card.Routines.true {
+    border: blue 10px solid;
+}
+.card.Manipulatives.true {
+    border: blue 10px solid;
+}
+
+.card.Extra.true {
+    border: blue 10px solid;
+}
+.noExcel {
+    text-align: center;
+    padding-top: 3em;
 }

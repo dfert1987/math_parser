@@ -30,44 +30,63 @@ function DisplayLesson({ modData, data }) {
         }
     }, [data, modData]);
 
-    console.log(sampleLesson);
-    return (
-        <div className='lessonContainer'>
-            {sampleLesson ? (
-                <div className='lessonTitleContainer'>
-                    <h2 className='gradeTitle'>Grade {sampleLesson.Grade}</h2>
-                    <h2 className='moduleTitle'>
-                        Module {sampleLesson.L1} - {sampleLesson['L1 Title']}
-                    </h2>
+    if (data && modData) {
+        return (
+            <>
+                {sampleLesson ? (
+                    <div className='lessonContainer'>
+                        <div className='lessonTitleContainer'>
+                            <h2 className='gradeTitle'>
+                                Grade {sampleLesson.Grade}
+                            </h2>
+                            <h2 className='moduleTitle'>
+                                Module {sampleLesson.L1} -{' '}
+                                {sampleLesson['L1 Title']}
+                            </h2>
 
-                    <h2 className='moduleTitle'>
-                        Lesson {sampleLesson.L2} - {sampleLesson['L2 Title']}
-                    </h2>
-                </div>
-            ) : null}
+                            <h2 className='moduleTitle'>
+                                Lesson {sampleLesson.L2} -{' '}
+                                {sampleLesson['L2 Title']}
+                            </h2>
+                        </div>
 
-            <div className='lessonSection'>
-                <h3 className='sectionTitle manip'>Digital Manipulatives</h3>
-                <DisplayRow
-                    type='Manipulatives'
-                    data={iTools}
-                    lesson={data.L2}
-                />
-            </div>
-            <hr className='divider' />
-            <div className='lessonSection'>
-                <h3 className='sectionTitle routines'>
-                    Mathematical Language Routines
-                </h3>
-                <DisplayRow type='Routines' data={routines} lesson={data.L2} />
-            </div>
-            <hr className='divider' />
-            <div className='lessonSection'>
-                <h3 className='sectionTitle extra'>Extra Support</h3>
-                <DisplayRow type='Extra' data={videos} lesson={data.L2} />
-            </div>
-        </div>
-    );
+                        <div className='lessonSection'>
+                            <h3 className='sectionTitle manip'>
+                                Digital Manipulatives
+                            </h3>
+                            <DisplayRow
+                                type='Manipulatives'
+                                data={iTools}
+                                lesson={sampleLesson.L2}
+                            />
+                        </div>
+                        <hr className='divider' />
+                        <div className='lessonSection'>
+                            <h3 className='sectionTitle routines'>
+                                Mathematical Language Routines
+                            </h3>
+                            <DisplayRow
+                                type='Routines'
+                                data={routines}
+                                lesson={sampleLesson.L2}
+                            />
+                        </div>
+                        <hr className='divider' />
+                        <div className='lessonSection'>
+                            <h3 className='sectionTitle extra'>
+                                Extra Support
+                            </h3>
+                            <DisplayRow
+                                type='Extra'
+                                data={videos}
+                                lesson={sampleLesson.L2}
+                            />
+                        </div>
+                    </div>
+                ) : null}
+            </>
+        );
+    }
 }
 
 export default DisplayLesson;

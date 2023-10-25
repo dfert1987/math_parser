@@ -76,8 +76,6 @@ function MainDisplay({ data }) {
         }
     };
 
-    console.log(lessonDisplayData);
-
     if (data.length) {
         return (
             <div className='mainDisplayContainer'>
@@ -156,7 +154,7 @@ function MainDisplay({ data }) {
     } else {
         return (
             <>
-                <h1>Please add a valid Excel file</h1>
+                <h1 className='noExcel'>Please upload a valid Excel file</h1>
             </>
         );
     }

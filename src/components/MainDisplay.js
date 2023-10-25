@@ -57,7 +57,6 @@ function MainDisplay({ data }) {
             setFilteredDataMods(removeUndefined);
 
             let justLessons = removeUndefined.map((item) => item.L2);
-            console.log(justLessons);
 
             let noDuplicateLessons = [];
 
@@ -73,8 +72,11 @@ function MainDisplay({ data }) {
                 (item) => item.L2 === option
             );
             setLessonDisplayData(filterLesson);
+            setLesson(option);
         }
     };
+
+    console.log(lessonDisplayData);
 
     if (data.length) {
         return (

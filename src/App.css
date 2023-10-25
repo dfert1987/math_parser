@@ -191,6 +191,7 @@ li {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin-right: 1em;
     margin-bottom: 1em;
+    cursor: pointer;
 }
 
 .innerCard {
@@ -199,6 +200,11 @@ li {
     justify-content: space-around;
     padding: 0.5em;
     font-size: 20px;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
 }
 
 .innerCard img {

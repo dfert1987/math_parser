@@ -21,24 +21,24 @@ function DisplayRow({ type, data, lesson }) {
             <div className='cardRow'>
                 {data.map((item, key) => {
                     const ofLesson = (item) => {
-                        console.log(item.L2);
-                        console.log(lesson);
                         if (item.L2 === lesson) {
                             return 'true';
                         }
                         return 'false';
                     };
                     return (
-                        <div
-                            className={`card ${type} ${ofLesson(item)}`}
-                            id={key}>
-                            <div className='innerCard'>
-                                {getImage()}
-                                <h4 className='cardText'>
-                                    {item.DisplayTitle.toString()}
-                                </h4>
+                        <a href={item.URI}>
+                            <div
+                                className={`card ${type} ${ofLesson(item)}`}
+                                id={key}>
+                                <div className='innerCard'>
+                                    {getImage()}
+                                    <h4 className='cardText'>
+                                        {item.DisplayTitle.toString()}
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     );
                 })}
             </div>

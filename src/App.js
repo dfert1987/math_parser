@@ -14,12 +14,13 @@ function App() {
                 <NavBar />
                 <Routes>
                     <Route
-                        exact path='/'
+                        exact
+                        path='/'
                         element={<ExcelReader setData={setData} />}
                     />
-              
+
                     <Route
-                        path='/lessons'
+                        path='/lessons/:module/:lesson'
                         element={<MainDisplay data={data} />}
                     />
                 </Routes>

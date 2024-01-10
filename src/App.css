@@ -238,3 +238,21 @@ a {
     text-align: center;
     padding-top: 3em;
 }
+
+.moduleButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    display: flex;
+}
+
+.leftButton {
+    margin-right: 1em;
+}
+
+.buttonSection {
+    display: flex;
+    justify-content: space-around;
+}

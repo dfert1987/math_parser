@@ -7,8 +7,23 @@ function MainDisplay({ data }) {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [mod, setMod] = useState(2);
+    const [mod, setMod] = useState(1);
     const [less, setLess] = useState(1);
+    const [highestMod, setHighestMod] = useState(1);
+
+    useEffect(() => {
+        let copyMods = [];
+        data.forEach((item) => {
+            if (item.L1) {
+                copyMods.push(Number(item.L1));
+            }
+        });
+        console.log(copyMods);
+        const max = Math.max(...copyMods);
+        setHighestMod(max);
+    }, [data]);
+
+    console.log(highestMod);
 
     const handleMod = (direction) => {
         if (direction === 'back') {

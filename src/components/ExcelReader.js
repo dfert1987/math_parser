@@ -39,7 +39,7 @@ function ExcelReader({ setData }) {
 
             promise.then((d) => {
                 setData(d);
-                navigate('/lessons/2/1/');
+                navigate('/lessons/1/1/');
             });
         } else setError(true);
     };

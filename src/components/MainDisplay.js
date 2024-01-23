@@ -10,6 +10,7 @@ function MainDisplay({ data }) {
     const [mod, setMod] = useState(1);
     const [less, setLess] = useState(1);
     const [highestMod, setHighestMod] = useState(1);
+    const [highestLesson, setHighestLesson] = useState(0);
 
     useEffect(() => {
         let copyMods = [];
@@ -18,12 +19,22 @@ function MainDisplay({ data }) {
                 copyMods.push(Number(item.L1));
             }
         });
-        console.log(copyMods);
         const max = Math.max(...copyMods);
         setHighestMod(max);
-    }, [data]);
 
-    console.log(highestMod);
+        let copyLessons = [];
+        data.forEach((item) => {
+            if (item.L1 === '1' && item.L2) {
+                copyLessons.push(Number(item.L2));
+            }
+        });
+        if (!copyLessons.length) {
+            setHighestLesson(0);
+        } else {
+            const maxLessons = Math.max(...copyLessons);
+            setHighestLesson(maxLessons);
+        }
+    }, [data]);
 
     const handleMod = (direction) => {
         if (direction === 'back') {
@@ -82,13 +93,14 @@ function MainDisplay({ data }) {
                                         Back
                                     </button>
                                     <button
+                                        disabled={mod > highestMod - 1}
                                         onClick={() => handleMod('forward')}>
                                         Forward
                                     </button>
                                 </div>
                             </div>
                             <div className='moduleButtons'>
-                                <h2>Lesson {params.lesson} </h2>
+                                <h2>{highestLesson === 0 ? 'NA' : params.lesson} </h2>
                                 <div className='buttonsContainer'>
                                     <button
                                         className='leftButton'
@@ -97,6 +109,10 @@ function MainDisplay({ data }) {
                                         Back
                                     </button>
                                     <button
+                                        disabled={
+                                            highestLesson === 0 ||
+                                            less > highestLesson - 1
+                                        }
                                         onClick={() => handleLesson('forward')}>
                                         Forward
                                     </button>

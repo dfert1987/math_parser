@@ -9,7 +9,6 @@ function MainDisplay({ data }) {
 
     const [mod, setMod] = useState(2);
     const [less, setLess] = useState(1);
-    console.log(mod);
 
     const handleMod = (direction) => {
         if (direction === 'back') {
@@ -29,9 +28,7 @@ function MainDisplay({ data }) {
     };
 
     const handleLesson = (direction) => {
-        console.log(less);
         if (direction === 'back') {
-            console.log(less);
             if (less > 1) {
                 let lessonMinus = less - 1;
                 navigate(
@@ -65,6 +62,7 @@ function MainDisplay({ data }) {
                                 <div className='buttonsContainer'>
                                     <button
                                         className='leftButton'
+                                        disabled={mod < 2}
                                         onClick={() => handleMod('back')}>
                                         Back
                                     </button>
@@ -79,6 +77,7 @@ function MainDisplay({ data }) {
                                 <div className='buttonsContainer'>
                                     <button
                                         className='leftButton'
+                                        disabled={less < 2}
                                         onClick={() => handleLesson('back')}>
                                         Back
                                     </button>

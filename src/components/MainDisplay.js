@@ -36,6 +36,29 @@ function MainDisplay({ data }) {
         }
     }, [data]);
 
+    const matchMod = (newMod) => {
+        let currentMod = [];
+
+        data.forEach((item) => {
+            if (Number(item.L1) === newMod) {
+                currentMod.push(item);
+            }
+        });
+        const filteredByLesson = currentMod.map((item) => item.L2);
+        console.log(filteredByLesson);
+        const onlyNumbers = filteredByLesson.filter(function (item) {
+            return !isNaN(item);
+        });
+        const toNumber = onlyNumbers.map((item) => Number(item));
+        const maxLesson = Math.max(...toNumber);
+        setHighestLesson(maxLesson);
+
+        console.log(maxLesson);
+
+    };
+
+   
+
     const handleMod = (direction) => {
         if (direction === 'back') {
             if (mod > 1) {
@@ -43,6 +66,7 @@ function MainDisplay({ data }) {
                 navigate('/lessons/' + modMinus.toString() + '/1');
                 setMod(mod - 1);
                 setLess(1);
+                matchMod(modMinus);
             }
         }
         if (direction === 'forward') {
@@ -50,6 +74,7 @@ function MainDisplay({ data }) {
             navigate('/lessons/' + modPlus.toString() + '/1/');
             setMod(mod + 1);
             setLess(1);
+            matchMod(modPlus);
         }
     };
 
@@ -100,7 +125,9 @@ function MainDisplay({ data }) {
                                 </div>
                             </div>
                             <div className='moduleButtons'>
-                                <h2>{highestLesson === 0 ? 'NA' : params.lesson} </h2>
+                                <h2>
+                                    {highestLesson === 0 ? 'NA' : params.lesson}{' '}
+                                </h2>
                                 <div className='buttonsContainer'>
                                     <button
                                         className='leftButton'

@@ -1,48 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Finger from '../assets/fingerpointr.jpeg';
 import Texting from '../assets/textingbub.jpeg';
 import Video from '../assets/videoicon.png';
 
-function DisplayRow({ type, data, lesson }) {
-    const getImage = () => {
-        if (type === 'Manipulatives') {
-            return <img src={Finger} alt='Finger Icon' />;
+function DisplayRow({ data, type }) {
+
+    
+    useEffect(() => {
+        let rowItems = [];
+
+        if (type === 'manip') {
+            data.forEach((item) => {
+                if (item['Product Label'] === 'iTools') {
+                    rowItems.push(item);
+                }
+            });
         }
-        if (type === 'Routines') {
-            return <img src={Texting} alt='Text Icon' />;
+        if (type === 'routines') {
+            data.forEach((item) => {
+                if (item['Product Label'] === 'Math Routine') {
+                    rowItems.push(item);
+                }
+            });
         }
-        if (type === 'Extra') {
-            return <img src={Video} alt='Video Icon' />;
+        if (type === 'extra') {
+            data.forEach((item) => {
+                if (
+                    item['Product Label'] ===
+                    'Math on the Spot Video: Lesson Support'
+                ) {
+                    rowItems.push(item);
+                }
+            });
         }
-    };
+    }, [data, type]);
 
     if (data.length) {
-        return (
-            <div className='cardRow'>
-                {data.map((item, key) => {
-                    const ofLesson = (item) => {
-                        if (item.L2 === lesson) {
-                            return 'true';
-                        }
-                        return 'false';
-                    };
-                    return (
-                        <a href={item.URI}>
-                            <div
-                                className={`card ${type} ${ofLesson(item)}`}
-                                id={key}>
-                                <div className='innerCard'>
-                                    {getImage()}
-                                    <h4 className='cardText'>
-                                        {item.DisplayTitle.toString()}
-                                    </h4>
-                                </div>
-                            </div>
-                        </a>
-                    );
-                })}
-            </div>
-        );
+        return <div className='displayRow'></div>;
     }
 }
 

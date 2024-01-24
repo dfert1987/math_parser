@@ -45,19 +45,13 @@ function MainDisplay({ data }) {
             }
         });
         const filteredByLesson = currentMod.map((item) => item.L2);
-        console.log(filteredByLesson);
         const onlyNumbers = filteredByLesson.filter(function (item) {
             return !isNaN(item);
         });
         const toNumber = onlyNumbers.map((item) => Number(item));
         const maxLesson = Math.max(...toNumber);
         setHighestLesson(maxLesson);
-
-        console.log(maxLesson);
-
     };
-
-   
 
     const handleMod = (direction) => {
         if (direction === 'back') {

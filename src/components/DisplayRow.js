@@ -1,43 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import Finger from '../assets/fingerpointr.jpeg';
-import Texting from '../assets/textingbub.jpeg';
-import Video from '../assets/videoicon.png';
+import React from 'react';
 
 function DisplayRow({ data, type }) {
-
-    
-    useEffect(() => {
-        let rowItems = [];
-
+    const getImage = () => {
         if (type === 'manip') {
-            data.forEach((item) => {
-                if (item['Product Label'] === 'iTools') {
-                    rowItems.push(item);
-                }
-            });
+            return (
+                <img
+                    src={require(`../assets/fingerpointr.jpeg`)}
+                    alt='card icon'
+                />
+            );
         }
         if (type === 'routines') {
-            data.forEach((item) => {
-                if (item['Product Label'] === 'Math Routine') {
-                    rowItems.push(item);
-                }
-            });
+            return (
+                <img
+                    src={require(`../assets/textingbub.jpeg`)}
+                    alt='card icon'
+                />
+            );
         }
         if (type === 'extra') {
-            data.forEach((item) => {
-                if (
-                    item['Product Label'] ===
-                    'Math on the Spot Video: Lesson Support'
-                ) {
-                    rowItems.push(item);
-                }
-            });
+            return (
+                <img src={require(`../assets/videoicon.png`)} alt='card icon' />
+            );
         }
-    }, [data, type]);
+    };
 
-    if (data.length) {
-        return <div className='displayRow'></div>;
-    }
+    const getCards = () => {
+        return data.map((item, index) => {
+            return (
+                <div className='card' key={index}>
+                    {getImage()}
+                    {/* <img
+                        src={require(`../assets/fingerpointr.jpeg`)}
+                        alt='card icon'
+                    /> */}
+                </div>
+            );
+        });
+    };
+
+    return <>{data.length && <div className='displayRow'>{getCards()}</div>}</>;
 }
 
 export default DisplayRow;

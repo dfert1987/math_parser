@@ -207,9 +207,9 @@ a {
     text-decoration: none !important;
 }
 
-.innerCard img {
+.innerCard {
     max-height: 125px;
-    max-width: 250px;
+    max-width: 200px;
     padding-right: 0.5em;
 }
 
@@ -255,4 +255,14 @@ a {
 .buttonSection {
     display: flex;
     justify-content: space-around;
+}
+
+.card img {
+    height: 200px;
+}
+
+.displayRow {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1em;
 }

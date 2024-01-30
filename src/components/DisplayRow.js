@@ -1,4 +1,5 @@
 import React from 'react';
+import '../';
 
 function DisplayRow({ data, type }) {
     const getImage = () => {
@@ -13,7 +14,7 @@ function DisplayRow({ data, type }) {
         if (type === 'routines') {
             return (
                 <img
-                    src={require(`../assets/textingbub.jpeg`)}
+                    src={require(`../assets/fingerpointr.jpeg`)}
                     alt='card icon'
                 />
             );
@@ -29,17 +30,22 @@ function DisplayRow({ data, type }) {
         return data.map((item, index) => {
             return (
                 <div className='card' key={index}>
-                    {getImage()}
-                    {/* <img
-                        src={require(`../assets/fingerpointr.jpeg`)}
-                        alt='card icon'
-                    /> */}
+                    <div>{getImage()}</div>
+                    <div>
+                        <h4>{item['Display Title']}</h4>
+                    </div>
                 </div>
             );
         });
     };
 
-    return <>{data.length && <div className='displayRow'>{getCards()}</div>}</>;
+    return (
+        <>
+            {data.length ? (
+                <div className='displayRow'>{getCards()}</div>
+            ) : null}
+        </>
+    );
 }
 
 export default DisplayRow;

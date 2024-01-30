@@ -257,8 +257,20 @@ a {
     justify-content: space-around;
 }
 
+.card {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-around;
+}
+
 .card img {
-    height: 200px;
+    height: 150px;
+    width: 150px;
+}
+
+.card div {
+    width: 150px;
+    padding-top: 1em;
 }
 
 .displayRow {

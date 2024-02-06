@@ -16,19 +16,18 @@ function Display({ data, lesson, module }) {
         setFilteredData(filteredArray);
 
         let justItools = filteredArray.filter(
-            (item) => item['Product Label'] === 'iTools'
+            (item) => item.ProductLabel === 'iTools'
         );
         setItools(justItools);
 
         let justRoutines = filteredArray.filter(
-            (item) => item['Product Label'] === 'Math Routine'
+            (item) => item.ProductLabel === 'Math Routine'
         );
         setRoutines(justRoutines);
 
         let justExtras = filteredArray.filter(
             (item) =>
-                item['Product Label'] ===
-                'Math on the Spot Video: Lesson Support'
+                item.ProductLabel === 'Math on the Spot Video: Lesson Support'
         );
         setExtra(justExtras);
     }, [data, lesson, module]);

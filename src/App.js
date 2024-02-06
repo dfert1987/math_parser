@@ -16,7 +16,7 @@ function App() {
                     <Route
                         exact
                         path='/'
-                        element={<ExcelReader setData={setData} />}
+                        element={<ExcelReader setData={setData} data={data}/>}
                     />
 
                     <Route

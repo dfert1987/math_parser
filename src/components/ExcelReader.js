@@ -38,7 +38,43 @@ function ExcelReader({ setData }) {
             });
 
             promise.then((d) => {
-                setData(d);
+                let whitespace = new RegExp(/\s/g);
+
+                const noSpaces = d.map((item) => {
+                    let modified = {};
+
+                    Object.keys(item).forEach((key) => {
+                        let value = item[key];
+                        key = key.replace(whitespace, '');
+                        modified[key] = value;
+                    });
+                    return modified;
+                });
+
+                const filteredData = noSpaces.map(
+                    ({
+                        Assign,
+                        Description,
+                        Excludefromreleasecandidatemanifest,
+                        HMHKeywords,
+                        GUID,
+                        ID,
+                        InstructionalPurpose,
+                        InstructionalSegment,
+                        ManuallyScorable,
+                        Markets,
+                        MediaType,
+                        ProgramTitle,
+                        SEFacing,
+                        Search,
+                        SortOrder,
+                        TeacherManualEntry,
+                        TeacherResourcePanel,
+                        ...items
+                    }) => items
+                );
+                console.log(filteredData);
+                setData(filteredData);
                 navigate('/lessons/1/1/');
             });
         } else setError(true);

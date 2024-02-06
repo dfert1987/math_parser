@@ -164,18 +164,22 @@ li {
 }
 
 .manip {
-    background-color: #7873f5;
-    color: white;
+    background-color: white;
+    color: Black;
+    border-bottom: 2px black;
+
 }
 
 .routines {
-    background-color: #ff6ec4;
-    color: white;
+    background-color: rgb(193, 240, 240);
+    color: Black;
+    border-bottom: 2px black;
+
 }
 
 .extra {
-    background-color: rgb(7, 122, 122);
-    color: white;
+    background-color: white;
+    color: Black;
 }
 
 .cardRow {
@@ -270,7 +274,7 @@ a {
 
 .card div {
     width: 150px;
-    padding-top: 1em;
+    padding-top: ;
 }
 
 .displayRow {

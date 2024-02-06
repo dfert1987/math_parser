@@ -14,7 +14,7 @@ function DisplayRow({ data, type }) {
         if (type === 'routines') {
             return (
                 <img
-                    src={require(`../assets/fingerpointr.jpeg`)}
+                    src={require(`../assets/textingbub.jpeg`)}
                     alt='card icon'
                 />
             );
@@ -32,7 +32,9 @@ function DisplayRow({ data, type }) {
                 <div className='card' key={index}>
                     <div>{getImage()}</div>
                     <div>
-                        <h4>{item['Display Title']}</h4>
+                        <a href={item.URI}>
+                            <h4>{item.DisplayTitle}</h4>
+                        </a>
                     </div>
                 </div>
             );

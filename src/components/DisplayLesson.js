@@ -10,18 +10,18 @@ function DisplayLesson({ modData, data }) {
     useEffect(() => {
         if (modData && data) {
             let justItools = modData.filter(
-                (item) => item['Product Label'] === 'iTools'
+                (item) => item.ProductLabel === 'iTools'
             );
             setItools(justItools);
 
             let justRoutines = modData.filter(
-                (item) => item['Product Label'] === 'Math Routine'
+                (item) => item.ProductLabel === 'Math Routine'
             );
             setRoutines(justRoutines);
 
             let justVideos = modData.filter(
                 (item) =>
-                    item['Product Label'] ===
+                    item.ProductLabel ===
                     'Math on the Spot Video: Lesson Support'
             );
             setVideos(justVideos);
@@ -41,12 +41,12 @@ function DisplayLesson({ modData, data }) {
                             </h2>
                             <h2 className='moduleTitle'>
                                 Module {sampleLesson.L1} -{' '}
-                                {sampleLesson['L1 Title']}
+                                {sampleLesson.L1Title}
                             </h2>
 
                             <h2 className='moduleTitle'>
                                 Lesson {sampleLesson.L2} -{' '}
-                                {sampleLesson['L2 Title']}
+                                {sampleLesson.L1Title}
                             </h2>
                         </div>
 

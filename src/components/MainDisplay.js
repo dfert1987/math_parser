@@ -11,8 +11,11 @@ function MainDisplay({ data }) {
     const [less, setLess] = useState(1);
     const [highestMod, setHighestMod] = useState(1);
     const [highestLesson, setHighestLesson] = useState(0);
+    const [stored, setStored] = useState([]);
 
     useEffect(() => {
+        // const storedData = JSON.parse(localStorage.getItem('excel-data'));
+        // console.log(storedData);
         let copyMods = [];
         data.forEach((item) => {
             if (item.L1) {
@@ -94,6 +97,8 @@ function MainDisplay({ data }) {
             setLess(less + 1);
         }
     };
+
+    console.log();
 
     if (data.length) {
         return (

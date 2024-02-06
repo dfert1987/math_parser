@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
+import Dexie from 'dexie';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 function ExcelReader({ setData }) {
     const [error, setError] = useState(false);
+    const [status, setStatus] = useState('');
+
+    var db = new Dexie('excelData');
+    db.version(1).stores({
+        excel: '++id,DisplayTitle,Grade,L1,L1Label,L1Title,L2,L2Label,L2Title,URI',
+    });
+
+    const { excel } = db;
+
+    const sample = useLiveQuery(() => excel.toArray(), []);
+
+    const addExcel = async (filteredData) => {
+        await excel.bulkAdd(filteredData);
+    };
+
+    console.log(sample);
 
     const navigate = useNavigate();
 
@@ -61,19 +79,39 @@ function ExcelReader({ setData }) {
                         ID,
                         InstructionalPurpose,
                         InstructionalSegment,
+                        L1Label,
+                        L2Label,
+                        L3,
+                        L3Label,
+                        L3Title,
+                        L4,
+                        L4Label,
+                        L4Title,
                         ManuallyScorable,
                         Markets,
                         MediaType,
+                        ProductCategory,
                         ProgramTitle,
+                        RecommendedResource,
                         SEFacing,
                         Search,
                         SortOrder,
+                        StudentResourcePanel,
                         TeacherManualEntry,
                         TeacherResourcePanel,
                         ...items
                     }) => items
                 );
+
+                addExcel(filteredData);
+
                 console.log(filteredData);
+                // localStorage.setItem(
+                //     'storedData',
+                //     JSON.stringify(filteredData)
+                // );
+                // addData(filteredData);
+
                 setData(filteredData);
                 navigate('/lessons/1/1/');
             });

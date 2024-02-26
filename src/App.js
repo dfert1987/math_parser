@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ExcelReader from './components/ExcelReader';
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+} from 'react-router-dom';
 import MainDisplay from './components/MainDisplay';
 import NavBar from './components/NavBar';
 import './App.css';
 
 function App() {
-    const [data, setData] = useState([]);
-
     return (
         <Router>
             <div className='App'>
                 <NavBar />
                 <Routes>
-                    <Route
-                        exact
-                        path='/'
-                        element={<ExcelReader setData={setData} data={data}/>}
-                    />
+                    <Route path='/' element={<Navigate to='/lessons/1/1' />} />
 
                     <Route
                         path='/lessons/:module/:lesson'
-                        element={<MainDisplay data={data} />}
+                        element={<MainDisplay />}
                     />
                 </Routes>
             </div>

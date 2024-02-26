@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { data } from '../assets/Data';
 import Display from './Display';
-import StevePic from '../assets/steve.jpeg';
+import Logo from '../assets/hmhlogo.png';
 
 function MainDisplay() {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [mod, setMod] = useState(1);
-    const [less, setLess] = useState(1);
+    const [mod, setMod] = useState(params.module);
+    const [less, setLess] = useState(params.lesson);
     const [highestMod, setHighestMod] = useState(1);
     const [highestLesson, setHighestLesson] = useState(0);
     const [updatedData, setUpdatedData] = useState([]);
-    console.log(updatedData);
 
     useEffect(() => {
         let whitespace = new RegExp(/\s/g);
@@ -43,7 +42,7 @@ function MainDisplay() {
 
         let copyLessons = [];
         noSpaces.forEach((item) => {
-            if (item.L1 === '1' && item.L2) {
+            if (item.L1 && item.L2) {
                 copyLessons.push(Number(item.L2));
             }
         });
@@ -83,9 +82,9 @@ function MainDisplay() {
             }
         }
         if (direction === 'forward') {
-            let modPlus = mod + 1;
+            let modPlus = parseInt(mod) + 1;
             navigate('/lessons/' + modPlus.toString() + '/1/');
-            setMod(mod + 1);
+            setMod(modPlus);
             setLess(1);
             matchMod(modPlus);
         }
@@ -106,11 +105,11 @@ function MainDisplay() {
             }
         }
         if (direction === 'forward') {
-            let lessonPlus = less + 1;
+            let lessonPlus = parseInt(less) + 1;
             navigate(
                 '/lessons/' + mod.toString() + '/' + lessonPlus.toString() + '/'
             );
-            setLess(less + 1);
+            setLess(lessonPlus);
         }
     };
 
@@ -139,7 +138,8 @@ function MainDisplay() {
                             </div>
                             <div className='moduleButtons'>
                                 <h2>
-                                    {highestLesson === 0 ? 'NA' : params.lesson}{' '}
+                                    Lesson{' '}
+                                    {highestLesson === 0 ? 'NA' : params.lesson}
                                 </h2>
                                 <div className='buttonsContainer'>
                                     <button
@@ -160,7 +160,7 @@ function MainDisplay() {
                             </div>
                         </div>
                     </div>
-                    <img src={StevePic} alt='Steve' />
+                    <img src={Logo} alt='Logo' />
                 </header>
                 <Display data={updatedData} lesson={less} module={mod} />
             </div>
@@ -168,7 +168,7 @@ function MainDisplay() {
     } else {
         return (
             <>
-                <h1 className='noExcel'>Please upload a valid Excel file</h1>
+                <h1 className='noExcel'>...loading</h1>
             </>
         );
     }

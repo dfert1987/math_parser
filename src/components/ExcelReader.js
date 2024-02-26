@@ -21,7 +21,6 @@ function ExcelReader({ setData }) {
         await excel.bulkAdd(filteredData);
     };
 
-
     const navigate = useNavigate();
 
     const readExcel = (file) => {
@@ -102,10 +101,9 @@ function ExcelReader({ setData }) {
                     }) => items
                 );
 
-                addExcel(filteredData);            
+                addExcel(filteredData);
                 setData(filteredData);
-                const file = new Blob() 
-                navigate('/lessons/1/1/');
+                navigate('/1/1/');
             });
         } else setError(true);
     };

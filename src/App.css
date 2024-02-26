@@ -166,13 +166,12 @@ li {
 .manip {
     background-color: white;
     color: Black;
-    border-bottom: 2px solid black;
 }
 
 .routines {
     background-color: rgb(193, 240, 240);
     color: Black;
-    border-bottom: 2px solid black;
+   
 }
 
 .extra {

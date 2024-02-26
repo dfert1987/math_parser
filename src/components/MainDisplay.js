@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { data } from '../assets/Data';
 import Display from './Display';
 import StevePic from '../assets/steve.jpeg';
 
-function MainDisplay({ data }) {
+function MainDisplay() {
     const params = useParams();
     const navigate = useNavigate();
 
@@ -11,13 +12,28 @@ function MainDisplay({ data }) {
     const [less, setLess] = useState(1);
     const [highestMod, setHighestMod] = useState(1);
     const [highestLesson, setHighestLesson] = useState(0);
-    const [stored, setStored] = useState([]);
+    const [updatedData, setUpdatedData] = useState([]);
+    console.log(updatedData);
 
     useEffect(() => {
-        // const storedData = JSON.parse(localStorage.getItem('excel-data'));
-        // console.log(storedData);
+        let whitespace = new RegExp(/\s/g);
+
+        const noSpaces = data.map((item) => {
+            let modified = {};
+
+            Object.keys(item).forEach((key) => {
+                let value = item[key];
+                key = key.replace(whitespace, '');
+                modified[key] = value;
+            });
+            return modified;
+        });
+
+        setUpdatedData(noSpaces);
+
         let copyMods = [];
-        data.forEach((item) => {
+
+        noSpaces.forEach((item) => {
             if (item.L1) {
                 copyMods.push(Number(item.L1));
             }
@@ -26,7 +42,7 @@ function MainDisplay({ data }) {
         setHighestMod(max);
 
         let copyLessons = [];
-        data.forEach((item) => {
+        noSpaces.forEach((item) => {
             if (item.L1 === '1' && item.L2) {
                 copyLessons.push(Number(item.L2));
             }
@@ -37,12 +53,12 @@ function MainDisplay({ data }) {
             const maxLessons = Math.max(...copyLessons);
             setHighestLesson(maxLessons);
         }
-    }, [data]);
+    }, []);
 
     const matchMod = (newMod) => {
         let currentMod = [];
 
-        data.forEach((item) => {
+        updatedData.forEach((item) => {
             if (Number(item.L1) === newMod) {
                 currentMod.push(item);
             }
@@ -98,9 +114,7 @@ function MainDisplay({ data }) {
         }
     };
 
-    console.log();
-
-    if (data.length) {
+    if (updatedData.length) {
         return (
             <div className='mainDisplayContainer'>
                 <header className='mainHeader'>
@@ -148,7 +162,7 @@ function MainDisplay({ data }) {
                     </div>
                     <img src={StevePic} alt='Steve' />
                 </header>
-                <Display data={data} lesson={less} module={mod} />
+                <Display data={updatedData} lesson={less} module={mod} />
             </div>
         );
     } else {

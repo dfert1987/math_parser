@@ -30,8 +30,9 @@ function Display({ data, lesson, module }) {
                 item.ProductLabel === 'Math on the Spot Video: Lesson Support'
         );
         setExtra(justExtras);
-    }, [data, lesson, module]);
-
+        console.log(filteredArray);
+    }, [lesson, module]);
+    console.log(iTools);
     return (
         <div className='displayContainer'>
             <div className='sectionContainer manip'>

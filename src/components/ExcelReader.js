@@ -3,10 +3,10 @@ import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
 import Dexie from 'dexie';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { saveAs } from 'file-saver';
 
 function ExcelReader({ setData }) {
     const [error, setError] = useState(false);
-    const [status, setStatus] = useState('');
 
     var db = new Dexie('excelData');
     db.version(1).stores({
@@ -21,7 +21,6 @@ function ExcelReader({ setData }) {
         await excel.bulkAdd(filteredData);
     };
 
-    console.log(sample);
 
     const navigate = useNavigate();
 
@@ -103,16 +102,9 @@ function ExcelReader({ setData }) {
                     }) => items
                 );
 
-                addExcel(filteredData);
-
-                console.log(filteredData);
-                // localStorage.setItem(
-                //     'storedData',
-                //     JSON.stringify(filteredData)
-                // );
-                // addData(filteredData);
-
+                addExcel(filteredData);            
                 setData(filteredData);
+                const file = new Blob() 
                 navigate('/lessons/1/1/');
             });
         } else setError(true);
